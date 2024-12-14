@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ssafy</groupId>
-	<artifactId>study_04_Bohyung</artifactId>
+	<artifactId>04_SpringBoot_MyBatis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>study_04_Bohyung</name>
+	<name>04_SpringBoot_MyBatis</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
