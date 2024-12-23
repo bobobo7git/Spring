@@ -123,18 +123,24 @@ public class BoardController {
 ```
 
 ## UPDATE
-#### 잘못된 코드
+
 ```java
 @RestController
 public class BoardController {
 	// ...
-	@PutMapping("/board/{id}")
-	public ResponseEntity<Void> update(@PathVariable("id")int id) {
-		// board.setId(id); // board id를 모른다면
-		boardService.modifyBoard(board);
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	} 
+	@PutMapping("/coverletters/{cover_id}")
+	public ResponseEntity<?> update(@PathVariable("cover_id")int coverId, @ModelAttribute CoverLetter letter) {
+		letter.setCoverId(coverId);
+		boolean isUpdated = coverLetterService.modifyCoverLetter(letter);
+		
+		if (isUpdated) {
+			CoverLetter updatedCoverLetter = coverLetterService.viewCoverLetter(coverId);
+			return new ResponseEntity<>(updatedCoverLetter, HttpStatus.OK);
+		}
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed");
+	}
 }
 ```
 - 이렇게 하면 입력하지 않은 데이터가 `null`로 수정된다.
 	- 프론트에서 모든 데이터를 입력하도록 강제한다면 문제없다.
+	- 혹은 다른 방법
